@@ -1,7 +1,7 @@
+require 'require_all'
+
 require_relative '../composition'
-require_relative 'window'
-require_relative 'keyboard'
-require_relative 'scene'
+require_all Dir[File.dirname(__FILE__)]
 
 class Composition::Client
   include Composition
