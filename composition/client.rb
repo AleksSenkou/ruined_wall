@@ -24,7 +24,7 @@ class Composition::Client
     scene.prepare
   end
 
-  def draw!
+  def start!
     scene.draw
 
     glutMainLoop
