@@ -52,19 +52,22 @@ class Composition::Scene
     # Move right 3 units
     glTranslatef 1.5, 0.0, -6.0
 
-    # Draw a rectangle
-    glBegin GL_QUADS do
-      glVertex3f -1.0,  1.0, 0.0
-      glVertex3f  1.0,  1.0, 0.0
-      glVertex3f  1.0, -1.0, 0.0
-      glVertex3f -1.0, -1.0, 0.0
-    end
+    draw_rectangle
 
     # Swap buffers for display
     glutSwapBuffers
   end
 
   private
+
+  def draw_rectangle(step = 0.3)
+    glBegin GL_QUADS do
+      glVertex3f -step,  step, 0.0
+      glVertex3f  step,  step, 0.0
+      glVertex3f  step, -step, 0.0
+      glVertex3f -step, -step, 0.0
+    end
+  end
 
   def reshape(width, height)
     height = 1 if height == 0
