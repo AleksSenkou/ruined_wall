@@ -69,6 +69,9 @@ class Composition::Scene
   private
 
   def draw_rectangle(step = 0.3)
+    # set blue color
+    glColor3f 0.5, 0.5, 1.0
+
     glBegin GL_QUADS do
       glVertex3f -step,  step, 0.0
       glVertex3f  step,  step, 0.0
