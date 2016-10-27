@@ -3,6 +3,9 @@ require_relative '../composition'
 class Composition::Scene
   include Composition
 
+  BLOCKS_COUNT = 6
+  RECTANGLES_COUNT = 8
+
   attr_reader :window
 
   def initialize(window:)
@@ -18,8 +21,6 @@ class Composition::Scene
     glutReshapeFunc :reshape
 
     prepare_gl
-
-    # http://nehe.gamedev.net/tutorial/your_first_polygon/13002/
   end
 
   def prepare_gl
@@ -42,20 +43,27 @@ class Composition::Scene
   end
 
   def draw
-    # Clear the screen and depth buffer
-    glClear GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT
+    reset_view
 
-    # Reset the view
-    glMatrixMode GL_MODELVIEW
-    glLoadIdentity
+    draw_wall
 
-    # Move right 3 units
-    glTranslatef 1.5, 0.0, -6.0
-
-    draw_rectangle
-
-    # Swap buffers for display
     glutSwapBuffers
+  end
+
+  def draw_wall
+    BLOCKS_COUNT.times do |block|
+      RECTANGLES_COUNT.times do |rectangle|
+        if block == 0 and rectangle == 0
+          glTranslatef -2.1, 1.5, -6.0
+        else
+          glTranslatef 0.612, 0.0, 0.0
+        end
+
+        draw_rectangle
+      end
+
+      glTranslatef -4.895, -0.61, 0.0
+    end
   end
 
   private
@@ -67,6 +75,15 @@ class Composition::Scene
       glVertex3f  step, -step, 0.0
       glVertex3f -step, -step, 0.0
     end
+  end
+
+  def reset_view
+    # Clear the screen and depth buffer
+    glClear GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT
+
+    # Reset the view
+    glMatrixMode GL_MODELVIEW
+    glLoadIdentity
   end
 
   def reshape(width, height)
