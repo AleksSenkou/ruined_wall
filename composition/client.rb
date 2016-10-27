@@ -26,6 +26,7 @@ class Composition::Client
 
   def start!
     scene.draw
+    window.fullscreen
 
     glutMainLoop
   end

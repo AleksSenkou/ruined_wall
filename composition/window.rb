@@ -16,4 +16,8 @@ class Composition::Window
 
     @base = glutCreateWindow NAME
   end
+
+  def fullscreen
+    glutFullScreen
+  end
 end
